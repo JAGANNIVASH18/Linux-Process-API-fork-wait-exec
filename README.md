@@ -1,3 +1,8 @@
+```
+Name: JAGANNIVASH U M
+Reg no: 212224240059
+```
+
 # Linux-Process-API-fork-wait-exec-
 Ex02-Linux Process API-fork(), wait(), exec()
 # Ex02-OS-Linux-Process API - fork(), wait(), exec()
@@ -23,42 +28,28 @@ Test the C Program for the desired output.
 
 # PROGRAM:
 
-## C Program to create new process using Linux API system calls fork() and getpid() , getppid() and to print process ID and parent Process ID using Linux API system calls
+## C Program to print process ID and parent Process ID using Linux API system calls
+```c
 
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+int main(void)
+{	//variable to store calling function's process id
+	pid_t process_id;
+	//variable to store parent function's process id
+	pid_t p_process_id;
+	//getpid() - will return process id of calling function
+	process_id = getpid();
+	//getppid() - will return process id of parent function
+	p_process_id = getppid();
+	//printing the process ids
 
-
-
-
-
-
-
-
-
-
-
-
-##OUTPUT
-
-
-
-
-
-
-
-
-## C Program to execute Linux system commands using Linux API system calls exec() , exit() , wait() family
-
-
-
-
-
-
-
-
-
-
-
-
+//printing the process ids
+	printf("The process id: %d\n",process_id);
+	printf("The process id of parent function: %d\n",p_process_id);
+	return 0; }
+```
 
 
 
@@ -73,7 +64,90 @@ Test the C Program for the desired output.
 
 
 
-##OUTPUT
+## OUTPUT
+
+
+<img width="458" height="224" alt="Screenshot 2025-09-13 134342" src="https://github.com/user-attachments/assets/be65b561-c74f-4911-aeb0-78fd1bb0cbc3" />
+
+
+
+
+
+
+
+
+
+
+
+## C Program to create new process using Linux API system calls fork() and exit()
+```c
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include<stdlib.h>
+int main()
+{ int pid; 
+pid=fork(); 
+if(pid == 0) 
+{ printf("Iam child my pid is %d\n",getpid()); 
+printf("My parent pid is:%d\n",getppid()); 
+exit(0); } 
+else{ 
+printf("I am parent, my pid is %d\n",getpid()); 
+sleep(100); 
+exit(0);} 
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+## OUTPUT
+
+
+
+
+<img width="352" height="191" alt="Screenshot 2025-09-13 134701" src="https://github.com/user-attachments/assets/b1159cf6-ae00-493a-b4bd-64ef34335aed" />
+
+
+
+
+## C Program to execute Linux system commands using Linux API system calls exec() family
+```c
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+int main()
+{       int status;
+        printf("Running ps with execlp\n");
+        execl("ps", "ps", "ax", NULL);
+        wait(&status);
+        if (WIFEXITED(status))
+                printf("child exited with status of %d\n", WEXITSTATUS(status));
+        else
+                puts("child did not exit successfully\n");
+        printf("Done.\n");
+printf("Running ps with execlp. Now with path specified\n");
+        execl("/bin/ps", "ps", "ax", NULL);
+        wait(&status);
+        if (WIFEXITED(status))
+                printf("child exited with status of %d\n", WEXITSTATUS(status));
+        else
+                puts("child did not exit successfully\n");
+        printf("Done.\n");
+        exit(0);}
+```
 
 
 
@@ -90,6 +164,16 @@ Test the C Program for the desired output.
 
 
 
+
+
+
+
+
+## OUTPUT
+
+<img width="1500" height="943" alt="Screenshot 2025-09-13 135048" src="https://github.com/user-attachments/assets/c72afc0b-18b4-4ece-969d-438ec73d4fde" />
+<img width="1919" height="1199" alt="Screenshot 2025-09-13 135056" src="https://github.com/user-attachments/assets/34c2adf7-d8a8-479f-b7cf-de739d40040f" />
+<img width="1919" height="1199" alt="Screenshot 2025-09-13 135100" src="https://github.com/user-attachments/assets/16a81d87-d545-41dc-884e-9f2c65437a18" />
 
 
 # RESULT:
